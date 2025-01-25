@@ -1,7 +1,15 @@
-﻿@{
+﻿@model Estudiante
+
+@{
     ViewData["Title"] = "Programación 5 1c 2025";
 }
 
 <div class="text-center">
     <h1 class="display-4">Hola Mundo</h1>
 </div>
+
+<div class="text-center">
+	<h2>Estudiante</h2>
+	<p>Nombre: @Model.Nombre</p>
+	<p>Nota: @Model.Nota</p>
+</div>	
