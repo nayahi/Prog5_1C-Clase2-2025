@@ -103,6 +103,30 @@ namespace Prog5_1C_Clase2_2025.Controllers
             return View("bCalc");
         }
 
+        [HttpPost]
+        public IActionResult Modulo()
+        {
+            try
+            {
+                int num1 = Convert.ToInt32(HttpContext.Request.Form["n1"].ToString());
+                int num2 = Convert.ToInt32(HttpContext.Request.Form["n2"].ToString());
+
+                if (num2 == 0)
+                {
+                    ViewBag.Result = "Error: No se puede calcular el módulo con divisor cero.";
+                }
+                else
+                {
+                    ViewBag.Result = "Resultado del módulo: " + (num1 % num2).ToString();
+                }
+            }
+            catch (Exception)
+            {
+                ViewBag.Result = "Datos erróneos ingresados.";
+            }
+            return View("bCalc");
+        }
+
         #endregion Calculadora basica
 
 
