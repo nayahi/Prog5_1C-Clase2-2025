@@ -8,11 +8,15 @@ namespace Prog5_1C_Clase2_2025.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+        
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
 
+        [Route("")] 
+        [Route("Indice")] 
+        [Route("/")] 
         public IActionResult Index()
         {
             var estudiante = new Estudiante(1, "Juan Perez", 90);
@@ -41,6 +45,7 @@ namespace Prog5_1C_Clase2_2025.Controllers
         }
 
         [HttpPost]
+        [ActionName("Sumar")]
         public IActionResult Suma()
         {
             try
@@ -57,6 +62,8 @@ namespace Prog5_1C_Clase2_2025.Controllers
         }
 
         [HttpPost]
+        [ActionName("Restar")]
+
         public IActionResult Resta()
         {
             try
@@ -71,7 +78,10 @@ namespace Prog5_1C_Clase2_2025.Controllers
             }
             return View("bCalc");
         }
+
         [HttpPost]
+        [ActionName("Multiplicar")]
+
         public IActionResult Multiplicacion()
         {
             try
@@ -86,7 +96,9 @@ namespace Prog5_1C_Clase2_2025.Controllers
             }
             return View("bCalc");
         }
+
         [HttpPost]
+        [ActionName("Dividir")]
         public IActionResult Division()
         {
             try
@@ -104,6 +116,7 @@ namespace Prog5_1C_Clase2_2025.Controllers
         }
 
         [HttpPost]
+        [ActionName("Modular")]
         public IActionResult Modulo()
         {
             try
