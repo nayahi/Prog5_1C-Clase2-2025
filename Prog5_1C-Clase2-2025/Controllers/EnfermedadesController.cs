@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVC2.Data;
 using MVC2.Models;
+using Newtonsoft.Json;
 
 namespace Prog5_1C_Clase2_2025.Controllers
 {
@@ -24,6 +20,32 @@ namespace Prog5_1C_Clase2_2025.Controllers
         {
             return View(await _context.Enfermedades.ToListAsync());
         }
+
+        #region Acciones para invocar el buscador de enfermedades
+        [HttpPost]
+        public IActionResult Index(string enfermedad)
+        {
+            List<Enfermedades> enfermedades = BuscarEnfermedades(enfermedad);
+            return View(enfermedades);
+        }
+
+        [NonAction]
+        private List<Enfermedades> BuscarEnfermedades(string enfermedad)
+        {
+            List<Enfermedades> enfermedades = new List<Enfermedades>();
+            string apiURL = "http://localhost:7177/api/ObtenerEnfermedades";
+
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = client.GetAsync(apiURL + string.Format("/ObtenerEnfermedades?enfermedad={0}", enfermedad)).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                enfermedades = JsonConvert.DeserializeObject<List<Enfermedades>>(response.Content.ReadAsStringAsync().Result);
+            }
+            return enfermedades;
+        }
+
+
+        #endregion Acciones para invocar el buscador de enfermedades
 
         // GET: Enfermedades/Details/5
         public async Task<IActionResult> Details(int? id)

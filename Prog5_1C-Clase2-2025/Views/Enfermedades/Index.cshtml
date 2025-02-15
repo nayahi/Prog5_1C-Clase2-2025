@@ -7,6 +7,16 @@
 <h1>Index</h1>
 
 <p>
+    <a asp-action="Crear">Create</a>
+</p>
+
+<form method="post" asp-controller="Enfermedades" asp-action="Index">
+    <span> Nombre:</span>
+    <input type="text" name="enfermedad"/>
+    <input type="submit" value="Buscar" />
+</form>
+
+<p>
     <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
