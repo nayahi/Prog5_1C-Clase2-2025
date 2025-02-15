@@ -30,17 +30,18 @@ namespace Prog5_1C_Clase2_2025.Controllers
         }
 
         [NonAction]
-        private List<Enfermedades> BuscarEnfermedades(string enfermedad)
+        private static List<Enfermedades> BuscarEnfermedades(string enfermedad)
         {
             List<Enfermedades> enfermedades = new List<Enfermedades>();
-            string apiURL = "http://localhost:7177/api/ObtenerEnfermedades";
+            string apiUrl = "https://localhost:7177/api/ObtenerEnfermedades";
 
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = client.GetAsync(apiURL + string.Format("/ObtenerEnfermedades?enfermedad={0}", enfermedad)).Result;
+            HttpResponseMessage response = client.GetAsync(apiUrl + string.Format("/ObtenerEnfermedades?enfermedad={0}", enfermedad)).Result;
             if (response.IsSuccessStatusCode)
             {
                 enfermedades = JsonConvert.DeserializeObject<List<Enfermedades>>(response.Content.ReadAsStringAsync().Result);
             }
+
             return enfermedades;
         }
 
